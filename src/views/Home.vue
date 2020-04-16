@@ -2,7 +2,6 @@
   <div class="home">
     <button @click="logout">Logout</button>
     <ProductTable />
-    <p>{{products}}</p>
   </div>
 </template>
 
@@ -19,16 +18,6 @@ export default {
   },
   components: {
     ProductTable
-  },
-  computed: {
-    products: {
-      get () {
-        return this.$store.state.products
-      },
-      set (value) {
-        this.$store.commit('updateProducts', value)
-      }
-    }
   },
   created () {
     if (!localStorage.access_token) {

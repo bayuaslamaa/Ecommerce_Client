@@ -1,45 +1,52 @@
 <template>
-   <div>
-     <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-
-   </div>
+  <div>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Stock</th>
+        </tr>
+      </thead>
+      <tbody  v-for="product in products" :key="product.id">
+        <tr>
+          <th scope="row">{{product.id}}</th>
+          <td>{{product.name}}</td>
+          <td>Rp. {{product.price}}</td>
+          <td>{{product.stock}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'ProductTable'
+  name: 'ProductTable',
+  created () {
+    if (localStorage.access_token) {
+      this.$store
+        .dispatch('fetchProducts')
+        .then(({ data }) => {
+          const { products } = data
+          this.$store.commit('updateProducts', products)
+        })
+        .catch(err => console.log(err))
+    }
+  },
+  computed: {
+    products: {
+      get () {
+        return this.$store.state.products
+      },
+      set (value) {
+        this.$store.commit('updateProducts', value)
+      }
+    }
+  }
 }
 </script>
 
 <style>
-
 </style>

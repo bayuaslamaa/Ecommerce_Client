@@ -1,12 +1,33 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="isLogin">
       <router-link to="/">Home Page</router-link> |
-      <router-link to="/login">Login Page</router-link>
+      <router-link>Login Page</router-link> |
+      <router-link to="/login"><button @click="logout">Logout</button></router-link>
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  methods: {
+    logout () {
+      localStorage.clear()
+      this.$router.push('/login')
+      this.$store.commit('updateLogin', false)
+    }
+  },
+  computed: {
+    isLogin: {
+      get () {
+        return this.$store.state.isLogin
+      }
+    }
+  }
+}
+</script>>
 
 <style>
 #app {

@@ -10,8 +10,8 @@ const store = new Vuex.Store({
       email: '',
       password: ''
     },
-    products: [],
-    access_token: localStorage.access_token
+    isLogin: false,
+    products: []
   },
   mutations: {
     updateEmail (state, email) {
@@ -22,6 +22,9 @@ const store = new Vuex.Store({
     },
     updateProducts (state, products) {
       state.products = products
+    },
+    updateLogin (state, status) {
+      state.isLogin = status
     }
   },
   actions: {
@@ -32,15 +35,14 @@ const store = new Vuex.Store({
       })
     },
     fetchProducts ({ commit }) {
-      axios({
+      console.log('hi')
+      return axios({
         url: 'http://localhost:3000/products',
         method: 'get',
         headers: {
-          access_token: this.state.access_token
+          access_token: localStorage.access_token
         }
-      }).then(({ data }) => {
-        commit('updateProducts', data)
-      }).err(err => console.log(err))
+      })
     }
   }
 })

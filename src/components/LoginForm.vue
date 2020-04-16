@@ -34,10 +34,11 @@ export default {
         .then(({ data }) => {
           setTimeout(() => {
             loader.hide()
-          }, 5000)
+          }, 1500)
           localStorage.setItem('access_token', data.access_token)
           this.$store.commit('updateEmail', '')
           this.$store.commit('updatePassword', '')
+          this.$store.commit('updateLogin', true)
           this.$router.push('/')
         })
         .catch(err => {
