@@ -2,7 +2,6 @@
   <div id="app">
     <div id="nav" v-if="isLogin">
       <router-link to="/">Home Page</router-link> |
-      <router-link>Login Page</router-link> |
       <router-link to="/login"><button @click="logout">Logout</button></router-link>
     </div>
     <router-view/>

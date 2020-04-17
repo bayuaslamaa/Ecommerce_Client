@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <button @click="logout">Logout</button>
+    <button @click="addProduct">Add</button>
     <ProductTable />
   </div>
 </template>
@@ -11,9 +11,8 @@ import ProductTable from '../components/ProductTable.vue'
 export default {
   name: 'Home',
   methods: {
-    logout () {
-      localStorage.clear()
-      this.$router.push('/login')
+    addProduct () {
+      this.$router.push('/add')
     }
   },
   components: {

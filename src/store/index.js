@@ -11,7 +11,14 @@ const store = new Vuex.Store({
       password: ''
     },
     isLogin: false,
-    products: []
+    products: [],
+    image: '',
+    product: {
+      name: '',
+      image_url: '',
+      price: 2000,
+      stock: 0
+    }
   },
   mutations: {
     updateEmail (state, email) {
@@ -25,20 +32,64 @@ const store = new Vuex.Store({
     },
     updateLogin (state, status) {
       state.isLogin = status
+    },
+    setImage (state, imageUrl) {
+      state.image = imageUrl
+    },
+    updateName (state, name) {
+      state.product.name = name
+    },
+    updateImage (state, image) {
+      state.product.image_url = image
+    },
+    updatePrice (state, price) {
+      state.product.price = price
+    },
+    updateStock (state, stock) {
+      state.product.stock = stock
     }
   },
   actions: {
-    login ({ commit }) {
+    login () {
       return axios.post('http://localhost:3000/login', {
         email: this.state.user.email,
         password: this.state.user.password
       })
     },
-    fetchProducts ({ commit }) {
-      console.log('hi')
+    fetchProducts () {
       return axios({
         url: 'http://localhost:3000/products',
         method: 'get',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    addProduct () {
+      return axios({
+        url: 'http://localhost:3000/products',
+        method: 'post',
+        data: this.state.product,
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    getProduct (context, payload) {
+      const id = payload
+      return axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'get',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    deleteProduct (context, payload) {
+      const id = payload
+      return axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'delete',
         headers: {
           access_token: localStorage.access_token
         }
