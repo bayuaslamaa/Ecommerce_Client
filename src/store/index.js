@@ -52,14 +52,14 @@ const store = new Vuex.Store({
   },
   actions: {
     login () {
-      return axios.post('http://localhost:3000/login', {
+      return axios.post('https://protected-thicket-20896.herokuapp.com/login', {
         email: this.state.user.email,
         password: this.state.user.password
       })
     },
     fetchProducts () {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://protected-thicket-20896.herokuapp.com/products',
         method: 'get',
         headers: {
           access_token: localStorage.access_token
@@ -68,7 +68,7 @@ const store = new Vuex.Store({
     },
     addProduct () {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://protected-thicket-20896.herokuapp.com/products',
         method: 'post',
         data: this.state.product,
         headers: {
@@ -79,7 +79,7 @@ const store = new Vuex.Store({
     getProduct (context, payload) {
       const id = payload
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://protected-thicket-20896.herokuapp.com/products/${id}`,
         method: 'get',
         headers: {
           access_token: localStorage.access_token
@@ -89,7 +89,7 @@ const store = new Vuex.Store({
     deleteProduct (context, payload) {
       const id = payload
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://protected-thicket-20896.herokuapp.com/products/${id}`,
         method: 'delete',
         headers: {
           access_token: localStorage.access_token
@@ -99,7 +99,7 @@ const store = new Vuex.Store({
     updateProduct (context, payload) {
       const id = payload
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://protected-thicket-20896.herokuapp.com/products/${id}`,
         method: 'put',
         headers: {
           access_token: localStorage.access_token
