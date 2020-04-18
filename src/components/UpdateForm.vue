@@ -2,11 +2,11 @@
   <div>
       <div class="card text-center col-4 offset-4">
   <div class="card-header">
-    Add
+    Update
   </div>
   <div class="card-body">
     <h5 class="card-title">Input the product here</h5>
-<form @submit.prevent="addProduct">
+<form @submit.prevent="updateProduct">
   <div class="form-group">
     <label>Name</label>
     <input type="text" v-model="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter product name">
@@ -35,15 +35,16 @@
 
 <script>
 export default {
-  name: 'AddForm',
+  name: 'UpdateForm',
   methods: {
-    addProduct () {
-      this.$store.dispatch('addProduct')
+    updateProduct () {
+      const id = this.$route.params.id
+      this.$store.dispatch('updateProduct', id)
         .then(({ data }) => {
-          this.$alert(`success adding product ${data.name} with id ${data.id}`)
+          this.$alert(`Success updating product with id ${id}`)
           this.$router.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => this.$alert(err))
     }
   },
   computed: {

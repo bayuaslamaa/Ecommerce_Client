@@ -16,6 +16,7 @@ export default {
       localStorage.clear()
       this.$router.push('/login')
       this.$store.commit('updateLogin', false)
+      this.$alert('See ya next time!')
     }
   },
   computed: {

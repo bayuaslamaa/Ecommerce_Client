@@ -13,6 +13,7 @@ const store = new Vuex.Store({
     isLogin: false,
     products: [],
     image: '',
+    price: '',
     product: {
       name: '',
       image_url: '',
@@ -93,6 +94,17 @@ const store = new Vuex.Store({
         headers: {
           access_token: localStorage.access_token
         }
+      })
+    },
+    updateProduct (context, payload) {
+      const id = payload
+      return axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'put',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: this.state.product
       })
     }
   }

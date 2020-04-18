@@ -21,6 +21,14 @@ export default {
   created () {
     if (!localStorage.access_token) {
       this.$router.push('/login')
+      this.$alert('Please login')
+    } else {
+      this.$store.commit('setImage', '')
+      this.$store.commit('updateName', '')
+      this.$store.commit('updateImage', '')
+      this.$store.commit('updatePrice', '')
+      this.$store.commit('updateStock', '')
+      this.$store.commit('updateLogin', true)
     }
   }
 }

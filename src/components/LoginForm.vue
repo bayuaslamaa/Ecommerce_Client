@@ -32,6 +32,7 @@ export default {
       })
       this.$store.dispatch('login')
         .then(({ data }) => {
+          this.$alert('WELCOME ADMIN')
           setTimeout(() => {
             loader.hide()
           }, 1500)
@@ -44,11 +45,11 @@ export default {
         .catch(err => {
           this.$store.commit('updateEmail', '')
           this.$store.commit('updatePassword', '')
-          console.log(err)
+          this.$alert(err)
         })
     },
     onCancel () {
-      console.log('User cancelled the loader.')
+      this.$alert('Admin Cancelled the loader')
     }
   },
   computed: {
